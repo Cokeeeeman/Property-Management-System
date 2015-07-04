@@ -1,14 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h1>
+  <strong>Guest:</strong>
   <%= @guest.name %>
-</p>
+</h1>
 
-<p>
-  <strong>Email:</strong>
-  <%= @guest.email %>
-</p>
+<% @r = @guest.room %>
+<% if @r.nil? %>
+  <p>This guest hasn't been assigned to any room yet!</p>
+<% else %>
+  <p>This guest is currently living in the room: <strong><%=@guest.room.name%></strong></p>
+<% end %>
 
-<%= link_to 'Edit', edit_guest_path(@guest) %> |
-<%= link_to 'Back', guests_path %>
+<p>Information of the guest: </p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td><%= @guest.id %></td>
+        <td><%= @guest.name %></td>
+        <td><%= @guest.email %></td>
+      </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_guest_path(@guest), class: "btn btn-primary" %> 
+<%= link_to 'Back', guests_path, class: "btn btn-primary" %>

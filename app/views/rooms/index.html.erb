@@ -2,7 +2,7 @@
 
 <h1>Listing Rooms</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -15,7 +15,14 @@
     <% @rooms.each do |room| %>
       <tr>
         <td><%= room.name %></td>
-        <td><%= room.guest.name %></td>
+        
+        <% g = room.guest %>
+        <% if g.nil? %>
+          <td> N/A </td>
+        <% else %>
+          <td><%= g.name %></td>
+        <% end %>
+        
         <td><%= link_to 'Show', room %></td>
         <td><%= link_to 'Edit', edit_room_path(room) %></td>
         <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -25,5 +32,6 @@
 </table>
 
 <br>
-
-<%= link_to 'New Room', new_room_path %>
+<div class="nbtn">
+  <%= link_to 'New Room', new_room_path, class: "btn btn-primary" %>
+</div>
