@@ -1,3 +1,4 @@
+<% provide(:title, 'Create Room' )%>
 <h1>New Room</h1>
 
 <%= form_for(@room) do |f| %>
@@ -17,10 +18,9 @@
     <div class="col-md-6 col-md-offset-3">
       <%= f.label :name %>
       <%= f.text_field :name %>
-    
-    
-      <%= f.label :guest_name %>
-      <%= f.text_field :guest_id %>
+      
+      <%= f.label :Assign_a_guest %>
+      <%= collection_select( :room, :guest_id,Guest.all, :id, :name, { :include_blank => "N/A" }, { :multiple => false } ) %>
     
       <%= f.submit "Create room", class: "btn btn-primary btn-sm"%>
       

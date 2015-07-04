@@ -1,3 +1,4 @@
+<% provide(:title, 'Edit Room' )%>
 <h1>Editing Room</h1>
 
 <%= form_for(@room) do |f| %>
@@ -19,8 +20,11 @@
       <%= f.text_field :name %>
     
     
-      <%= f.label :guest_name %>
-      <%= f.text_field :guest_id %>
+      <!--<%= f.label :guest_name %>-->
+      <!--<%= f.text_field :guest_id %>-->
+      
+      <%= f.label :Assign_a_guest %>
+      <%= collection_select( :room, :guest_id, Guest.all, :id, :name, { :include_blank => "N/A" }, { :multiple => false } ) %>
     
       <%= f.submit "Update", class: "btn btn-primary btn-sm"%>
       
