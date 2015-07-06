@@ -1,5 +1,6 @@
 class GuestsController < ApplicationController
   before_action :set_guest, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token
 
   # GET /guests
   # GET /guests.json
