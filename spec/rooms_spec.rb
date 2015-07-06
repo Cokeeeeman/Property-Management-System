@@ -11,15 +11,6 @@ describe 'List all rooms' do
   end
 end 
 
-#show--------------------------------------------------------------------------
-describe 'Show the information of the room' do
-  it 'room#show, should return 200 when asking the information of certain room' do
-    url = "https://holidale-cokeeeeman.c9.io/rooms/1.json"
-    result = RestClient.get url,  :content_type => :json, :accept => :json
-    expect(result.code).to eq(200)
-  end
-end  
-
 #new & #create--------------------------------------------------------------------------
 describe "Create new room", :type => :request do
   it "renders the page 'new' and creates a room" do
@@ -34,6 +25,19 @@ describe "Create new room", :type => :request do
     expect(result.code).to eq(201)
   end
 end
+
+#show--------------------------------------------------------------------------
+describe 'Show the information of the room' do
+  before :each do 
+    @room = Room.find_by(name: "TestRoom")
+  end
+  
+  it 'room#show, should return 200 when asking the information of certain room' do
+    url = "https://holidale-cokeeeeman.c9.io/rooms/" + @room.id.to_s + ".json"
+    result = RestClient.get url,  :content_type => :json, :accept => :json
+    expect(result.code).to eq(200)
+  end
+end  
 
 #edit & #update--------------------------------------------------------------------------
 describe "Update a room", :type => :request do

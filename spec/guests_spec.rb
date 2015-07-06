@@ -11,15 +11,6 @@ describe 'List all guests' do
   end
 end 
 
-#show--------------------------------------------------------------------------
-describe 'Show the information of the guest' do
-  it 'guest#show, should return 200 when asking the information of certain guest' do
-    url = "https://holidale-cokeeeeman.c9.io/guests/2.json"
-    result = RestClient.get url,  :content_type => :json, :accept => :json
-    expect(result.code).to eq(200)
-  end
-end  
-
 #new & #create--------------------------------------------------------------------------
 describe "Create new guest", :type => :request do
   it "renders the page 'new' and creates a guest" do
@@ -31,6 +22,19 @@ describe "Create new guest", :type => :request do
     expect(result.code).to eq(201)
   end
 end
+
+#show--------------------------------------------------------------------------
+describe 'Show the information of the guest' do
+  before :each do 
+    @guest = Guest.find_by(email: "ceshi@ceshi.com")
+  end
+  
+  it 'guest#show, should return 200 when asking the information of certain guest' do
+    url = "https://holidale-cokeeeeman.c9.io/guests/" + @guest.id.to_s + ".json"
+    result = RestClient.get url,  :content_type => :json, :accept => :json
+    expect(result.code).to eq(200)
+  end
+end  
 
 #edit & #update--------------------------------------------------------------------------
 describe "Update a guest", :type => :request do
